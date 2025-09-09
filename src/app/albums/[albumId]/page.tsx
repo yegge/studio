@@ -1,4 +1,3 @@
-
 import { supabase } from '@/lib/supabase';
 import type { Album, Track } from '@/lib/types';
 import { notFound } from 'next/navigation';
@@ -21,6 +20,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
+// Correct prop type for Next.js dynamic route
 type AlbumDetailPageProps = {
   params: {
     albumId: string;
@@ -73,6 +73,7 @@ function formatDuration(ms: number): string {
 }
 
 export default async function AlbumDetailPage({ params }: AlbumDetailPageProps) {
+  const data = await getAlbumData(params.albumId);
 
   if (!data) {
     notFound();
