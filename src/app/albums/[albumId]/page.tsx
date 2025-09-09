@@ -1,3 +1,4 @@
+
 import { supabase } from '@/lib/supabase';
 import type { Album, Track } from '@/lib/types';
 import { notFound } from 'next/navigation';
@@ -72,7 +73,6 @@ function formatDuration(ms: number): string {
 }
 
 export default async function AlbumDetailPage({ params }: AlbumDetailPageProps) {
-  const data = await getAlbumData(params.albumId);
 
   if (!data) {
     notFound();
