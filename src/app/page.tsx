@@ -38,7 +38,7 @@ export default async function Home() {
     <div className="container mx-auto py-8 px-4">
       <div className="text-center mb-12">
         <h1 className="text-5xl font-headline font-bold tracking-tight text-primary">
-          Album Collection
+          DISCOGRAPHY
         </h1>
         <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
           Browse through the collection of albums. Click on an album to see its tracks. Use the search bar to filter by title.
