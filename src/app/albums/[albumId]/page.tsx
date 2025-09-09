@@ -27,6 +27,10 @@ type AlbumDetailPageProps = {
 };
 
 async function getAlbumData(albumId: string): Promise<{ album: Album; tracks: Track[] } | null> {
+  if (!supabase) {
+    return null;
+  }
+
   const albumIdNum = parseInt(albumId, 10);
   if (isNaN(albumIdNum)) {
     return null;

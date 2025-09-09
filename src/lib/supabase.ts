@@ -1,10 +1,19 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+let supabase: SupabaseClient | null = null;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Supabase URL and Anon Key are not defined in environment variables.');
+try {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  
+  if (supabaseUrl && supabaseAnonKey) {
+    // The URL constructor will throw an error if the URL is invalid.
+    new URL(supabaseUrl);
+    supabase = createClient(supabaseUrl, supabaseAnonKey);
+  }
+} catch (error) {
+  console.error("Error initializing Supabase client:", error instanceof Error ? error.message : "An unknown error occurred. Make sure NEXT_PUBLIC_SUPABASE_URL is a valid URL.");
+  supabase = null;
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export { supabase };
